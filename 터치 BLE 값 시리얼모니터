@@ -6,7 +6,16 @@
 class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 데이터 전송시 callback
     void onWrite(BLECharacteristic* pCharacteristic) {
         std::string value = pCharacteristic->getValue();
-        if (value.length() > 0 && value.length() < 2) {  // 길이가 1이면
+
+//         if (value.length() > 5) {  // 길이가 6이상이면
+//            Serial.print("분기 3 : ");
+//            for (int i = 5; i < value.length(); i++) // 길이를 -5한 후에
+//            Serial.print(value[i]);  // 앞에 5개 없애고 출력
+//            Serial.println();
+//             Serial.println(touchRead(T0));  
+            
+
+        if (value.length() > 0) {  // 길이가 1 이상
             Serial.println(touchRead(T0));  // get value using T0
             delay(100);
         }
