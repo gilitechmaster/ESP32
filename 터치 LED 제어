@@ -1,0 +1,22 @@
+
+int led = 2;
+
+void setup() {
+    pinMode(led, OUTPUT);
+    
+
+}
+
+void loop() {
+
+ 
+        if(touchRead(T0) <= 90){
+          digitalWrite(led, LOW);
+        }
+        else{
+          digitalWrite(led, HIGH);
+        }
+
+}
+
+// 참고 https://deneb21.tistory.com/593
