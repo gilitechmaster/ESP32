@@ -48,3 +48,5 @@ void loop() {
   Serial.println(touchRead(T0));  // get value using T0
   delay(1000);
 }
+
+//https://forum.arduino.cc/t/sending-data-from-esp32-with-ble-in-my-phone/676015/7
