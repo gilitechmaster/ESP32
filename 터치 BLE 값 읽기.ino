@@ -3,31 +3,23 @@
 #include <BLEServer.h>
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+
+int sensorvalue = 0;
+
+
 class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 데이터 전송시 callback
     void onWrite(BLECharacteristic* pCharacteristic) {
         std::string value = pCharacteristic->getValue();
-
-//         if (value.length() > 5) {  // 길이가 6이상이면
-//            Serial.print("분기 3 : ");
-//            for (int i = 5; i < value.length(); i++) // 길이를 -5한 후에
-//            Serial.print(value[i]);  // 앞에 5개 없애고 출력
-//            Serial.println();
-//             Serial.println(touchRead(T0));  
-            
-
-        if (value.length() > 0) {  // 길이가 1 이상
-            Serial.println(touchRead(T0));  // get value using T0
-            delay(100);
+        if (touchRead(T0) > 100) {
+            Serial.print("New value: ");
+            for (int i = 0; i < value.length(); i++)
+            Serial.print(value[i]);
+            Serial.println();
         }
-       
     }
 };
-void setup()
-{
-        Serial.begin(115200);
-        delay(100); // give me time to bring up serial monitor
-        Serial.println("ESP32 Touch Test");
-   
+void setup() {
+    Serial.begin(115200);
     BLEDevice::init("MyESP32"); // 디바이스 이름
     BLEServer* pServer = BLEDevice::createServer();
     BLEService* pService = pServer->createService(SERVICE_UUID);
@@ -37,11 +29,22 @@ void setup()
         BLECharacteristic::PROPERTY_WRITE
     );
     pCharacteristic->setCallbacks(new MyCallbacks());
-    pCharacteristic->setValue("Hello World");
+
+  
+    sensorvalue = touchRead(T0);
+
+    //in order to send the value we must convert it to characteristic
+    char txString[8];
+    dtostrf(sensorvalue, 1, 2, txString);
+    pCharacteristic->setValue(txString);
+    //pCharacteristic->notify();
+    Serial.println("Sent value : " + String(txString));  
+    
     pService->start();
     BLEAdvertising* pAdvertising = pServer->getAdvertising();
     pAdvertising->start();
 }
-void loop()
-{
+void loop() {
+  Serial.println(touchRead(T0));  // get value using T0
+  delay(1000);
 }
