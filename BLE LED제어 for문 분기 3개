@@ -39,7 +39,8 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
 };
 void setup() {
     pinMode(led, OUTPUT);
-    Serial.begin(115200);
+    //Serial.begin(115200);
+    Serial.begin(9600);
     BLEDevice::init("MyESP32"); // 디바이스 이름
     BLEServer* pServer = BLEDevice::createServer();
     BLEService* pService = pServer->createService(SERVICE_UUID);
