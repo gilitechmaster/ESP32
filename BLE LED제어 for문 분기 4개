@@ -33,8 +33,8 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
             for (int i = 2; i < value.length(); i++)  // 길이를 -2한 후에
             Serial.print(value[i]);  // 앞에 2개 없애고 출력
             Serial.println();
-            digitalWrite(led, HIGH);  //  10분 후 꺼짐
-            delay(6000);
+            digitalWrite(led, HIGH);  //  10초 후 꺼짐
+            delay(10000);
             digitalWrite(led, LOW);
             delay(500);
         }
