@@ -1,8 +1,8 @@
-
 int led = 2;
 
 void setup() {
     pinMode(led, OUTPUT);
+    Serial.begin(9600);
     
 
 }
@@ -17,6 +17,6 @@ void loop() {
           digitalWrite(led, HIGH);
         }
 
-}
+        Serial.println(touchRead(T0));
 
-// 참고 https://deneb21.tistory.com/593
+}
