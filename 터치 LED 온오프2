@@ -1,0 +1,23 @@
+int led = 2;
+int states = 0;
+
+void setup() {
+    pinMode(led, OUTPUT);
+    Serial.begin(9600);
+    
+}
+
+void loop() {
+
+        if(touchRead(T0) <= 30){
+          states=!states;
+        }
+        digitalWrite(led, states);
+          
+        Serial.println(touchRead(T0));
+        delay(100);
+
+}
+
+//states함수 참고
+//https://blog.naver.com/PostView.naver?blogId=redcrow&logNo=221476790292
