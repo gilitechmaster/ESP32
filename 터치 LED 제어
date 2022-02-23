@@ -10,7 +10,7 @@ void setup() {
 void loop() {
 
  
-        if(touchRead(T0) <= 90){
+        if(touchRead(T0) <= 30){
           digitalWrite(led, LOW);
         }
         else{
