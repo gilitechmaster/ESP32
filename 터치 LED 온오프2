@@ -1,5 +1,5 @@
-int led1 = 2;
-int led2 = 18;
+int led1 = 2; // 첫번째 LED
+int led2 = 18; // 두번째 LED
 int states = 0;
 
 void setup() {
@@ -11,7 +11,7 @@ void setup() {
 
 void loop() {
 
-        if(touchRead(T0) <= 10){
+        if(touchRead(T0) <= 10){ // 터치T0 = IO04
           states=!states;
         }
         digitalWrite(led1, states);
