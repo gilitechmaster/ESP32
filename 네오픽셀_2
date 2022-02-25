@@ -1,0 +1,26 @@
+#include<Adafruit_NeoPixel.h>
+#define PIN 18
+#define NUM_LEDS 60 // 최대 60개까지 켜짐
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB+NEO_KHZ800);
+
+//int i = 0;
+
+void setup() {
+
+    Serial.begin(9600);
+    strip.begin();
+    strip.show();
+    
+}
+
+void loop() {
+    for(int i = 0; i < 60; i++) // i = 네오픽셀은 1번부터 60번까지
+    {
+      strip.setPixelColor(i,8,25,12);
+    }
+    strip.show();
+delay(80);
+}
+
+
+
