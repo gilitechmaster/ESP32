@@ -12,7 +12,7 @@ void setup() {
 }
 
 void loop() {
-  if (touchRead(T0) < 30) { // 터치 값 30 미만일 때
+  if (touchRead(T0) < 15) { // 터치 값 15 미만일 때
     for (int i = 0; i < 60; i++) // 네오픽셀 1~60번까지
     {
       strip.setPixelColor(i, 0, 0, 0); // 모두 off
@@ -20,7 +20,7 @@ void loop() {
     strip.show();
     delay(10);
   }
-  else if (touchRead(T0) > 30 && touchRead(T0) < 40) { // 터치 값 30 초과일 때
+  else if (touchRead(T0) > 15 && touchRead(T0) < 18) { // 터치 값 15~18
     for (int i = 0; i < 60; i++) // 네오픽셀 1~60번까지
     {
       strip.setPixelColor(i, 0, 0, 12);
@@ -29,16 +29,16 @@ void loop() {
     delay(10);
   }
 
-  else if (touchRead(T0) > 40 &&  touchRead(T0) < 60) { // 터치 값 30 초과일 때
+  else if (touchRead(T0) > 18 &&  touchRead(T0) < 25) { // 터치 값 18~25
     for (int i = 0; i < 60; i++) // 네오픽셀 1~60번까지
     {
       strip.setPixelColor(i, 0, 25, 12);
       //strip.setPixelColor(i,8,25,12); // 해당 값 만큼 LED on
     }
     strip.show();
-    delay(100);
+    delay(10);
   }
-  else if (touchRead(T0) > 60 &&  touchRead(T0) < 80) { // 터치 값 30 초과일 때
+  else if (touchRead(T0) > 25 &&  touchRead(T0) < 30) { // 터치 값 25~30
     for (int i = 0; i < 60; i++) // 네오픽셀 1~60번까지
     {
       strip.setPixelColor(i, 8, 25, 12); // 해당 값 만큼 LED on
@@ -46,7 +46,7 @@ void loop() {
     strip.show();
     delay(10);
   }
-  else if (touchRead(T0) > 80) { // 터치 값 30 초과일 때
+  else if (touchRead(T0) > 30) { // 터치 값 30 초과일 때
     for (int i = 0; i < 60; i++) // 네오픽셀 1~60번까지
     {
       strip.setPixelColor(i, 25, 25, 25); // 해당 값 만큼 LED on
