@@ -1,6 +1,6 @@
 #include<Adafruit_NeoPixel.h>
 #define PIN 18
-#define NUM_LEDS 60 // 최대 60개까지 켜짐
+#define NUM_LEDS 16 // 최대 16개까지 켜짐, 링형 네오픽셀 16bit
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
 #include <BLEDevice.h>
@@ -8,17 +8,17 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800)
 #include <BLEServer.h>
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
-int led = 18;
+//int led = 18;
 class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 데이터 전송시 callback
     void onWrite(BLECharacteristic* pCharacteristic) {
       std::string value = pCharacteristic->getValue();
 
         if (value.length() == 1) {  // 길이가 1이면
-        Serial.print("분기 1 : ");
+        Serial.print("끄기");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~60번까지
+        for (int i = 0; i < 16; i++) // 네오픽셀 1~60번까지
         {
           strip.setPixelColor(i, 0, 0, 0); // 모두 off
         } 
@@ -27,13 +27,18 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
       }
 
       if (value.length() == 2) {  // 길이가 2이면
-        Serial.print("분기 2");
+        Serial.print("켜기");
         for (int i = 2; i < value.length(); i++)  // 길이를 -2한 후에
           Serial.print(value[i]);  // 앞에 2개 없애고 출력
         Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~60번까지
+        for (int i = 0; i < 16; i++) // 네오픽셀 1~60번까지
         {
-          strip.setPixelColor(i, 0, 0, 12);
+          //strip.setPixelColor(i, 10, 10, 10); //0.1mA
+          //0.1mA * 16bit = 1.6mA가 맞을듯 싶다.
+          //strip.setPixelColor(i, 20, 20, 20); //0.19mA
+          //strip.setPixelColor(i, 30, 30, 30); //0.28mA
+          //strip.setPixelColor(i, 40, 40, 40); //0.39mA
+          strip.setPixelColor(i, 150, 150, 150);
         }
         strip.show();
         delay(10);
