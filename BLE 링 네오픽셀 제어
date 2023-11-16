@@ -18,7 +18,7 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~60번까지
+        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
         {
           strip.setPixelColor(i, 0, 0, 0); // 모두 off
         } 
@@ -27,19 +27,35 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
       }
 
       if (value.length() == 2) {  // 길이가 2이면
-        Serial.print("켜기");
+        Serial.print("흰색 켜기");
         for (int i = 2; i < value.length(); i++)  // 길이를 -2한 후에
           Serial.print(value[i]);  // 앞에 2개 없애고 출력
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~60번까지
-        {
+        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        { //rgb가 모두 동일하면 흰색 출력된다.
           //strip.setPixelColor(i, 10, 10, 10); //0.1mA
           //0.1mA * 16bit = 1.6mA가 맞을듯 싶다.
           //strip.setPixelColor(i, 20, 20, 20); //0.19mA
           //strip.setPixelColor(i, 30, 30, 30); //0.28mA
           //strip.setPixelColor(i, 40, 40, 40); //0.39mA
-          strip.setPixelColor(i, 150, 150, 150);
+          strip.setPixelColor(i, 150, 150, 150); //1.5mA
         }
+        strip.show();
+        delay(10);
+      }
+      
+      //https://en.wikipedia.org/wiki/Web_colors
+      //RGB 255값에 따른 색상 분류표
+      
+      if (value.length() == 3) {  // 길이가 3이면
+        Serial.print("꽃무늬화이트 켜기");
+        for (int i = 0; i < value.length(); i++)  // 모든 길이가
+          Serial.print(value[i]);  // 그냥 출력된다
+        Serial.println();
+        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        {
+          strip.setPixelColor(i, 255, 250, 240); //
+        } 
         strip.show();
         delay(10);
       }
