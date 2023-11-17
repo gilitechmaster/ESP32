@@ -1,19 +1,45 @@
+//BLE로 disconnect한 후에 scan이 안되는 버그를 해결하였다.
+//BLE 예제 notify와 기존의 BLE 네오픽셀 코드와 합했다.
+//응용한 BLE 코드는 아래와 같다.
+//https://community.appinventor.mit.edu/t/ble-esp32-bluetooth-send-receive-arduino-ide-multitouch/1980/9
+
 #include<Adafruit_NeoPixel.h>
 #define PIN 18
 #define NUM_LEDS 16 // 최대 16개까지 켜짐, 링형 네오픽셀 16bit
 Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
 #include <BLEDevice.h>
-#include <BLEUtils.h>
 #include <BLEServer.h>
+#include <BLEUtils.h>
+#include <BLE2902.h>
+
+String valor;
+
+BLEServer* pServer = NULL;
+BLECharacteristic* pCharacteristic = NULL;
+bool deviceConnected = false;
+bool oldDeviceConnected = false;
+//uint32_t value = 0;
+
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
-class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 데이터 전송시 callback
-    void onWrite(BLECharacteristic* pCharacteristic) {
+class MyServerCallbacks: public BLEServerCallbacks {
+    void onConnect(BLEServer* pServer) {
+      deviceConnected = true;
+    };
+
+    void onDisconnect(BLEServer* pServer) {
+      deviceConnected = false;
+    }
+};
+
+////////////////////// WriteStrings /////////////////////////////
+class MyCallbacks: public BLECharacteristicCallbacks {
+    void onWrite(BLECharacteristic *pCharacteristic) {
       std::string value = pCharacteristic->getValue();
 
-      if (value.length() == 1) {  // 길이가 1이면
+      if (value.length() == 1) {
         Serial.print("끄기");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
@@ -25,7 +51,6 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
         ring.show();
         delay(10);
       }
-
       if (value.length() == 2) {  // 길이가 2이면
         Serial.print("흰색 켜기");
         for (int i = 2; i < value.length(); i++)  // 길이를 -2한 후에
@@ -47,10 +72,6 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
         ring.show();
         delay(10);
       }
-
-      //https://en.wikipedia.org/wiki/Web_colors
-      //RGB 255값에 따른 색상 분류표
-
       if (value.length() == 3) {  // 길이가 3이면
         Serial.print("꽃무늬화이트 켜기");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
@@ -65,29 +86,71 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
       }
     }
 };
+///////////////////////////////////////////////////
 
 void setup() {
+  Serial.begin(115200);
 
-  Serial.begin(9600);
-  ring.begin();
-  ring.show();
+  // Create the BLE Device
+  BLEDevice::init("MyESP32");
 
-  BLEDevice::init("MyESP32"); // 디바이스 이름
-  BLEServer* pServer = BLEDevice::createServer();
-  BLEService* pService = pServer->createService(SERVICE_UUID);
-  BLECharacteristic* pCharacteristic = pService->createCharacteristic(
-                                         CHARACTERISTIC_UUID,
-                                         BLECharacteristic::PROPERTY_READ |
-                                         BLECharacteristic::PROPERTY_WRITE
-                                       );
+  // Create the BLE Server
+  pServer = BLEDevice::createServer();
+  pServer->setCallbacks(new MyServerCallbacks());
+
+  // Create the BLE Service
+  BLEService *pService = pServer->createService(SERVICE_UUID);
+
+  // Create a BLE Characteristic
+  pCharacteristic = pService->createCharacteristic(
+                      CHARACTERISTIC_UUID,
+                      BLECharacteristic::PROPERTY_READ   |
+                      BLECharacteristic::PROPERTY_WRITE  |
+                      BLECharacteristic::PROPERTY_NOTIFY |
+                      BLECharacteristic::PROPERTY_INDICATE
+                    );
+
+  // https://www.bluetooth.com/specifications/gatt/viewer?
+  //   attributeXmlFile=org.bluetooth.descriptor.gatt.client_characteristic_configuration.xml
+  // Create a BLE Descriptor
+  pCharacteristic->addDescriptor(new BLE2902());
+  // Esta línea es para el WriteStrings:
   pCharacteristic->setCallbacks(new MyCallbacks());
-  pCharacteristic->setValue("Hello World");
-  pService->start();
-  BLEAdvertising* pAdvertising = pServer->getAdvertising();
-  pAdvertising->start();
 
+  // Start the service
+  pService->start();
+
+  // Start advertising
+  BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
+  pAdvertising->addServiceUUID(SERVICE_UUID);
+  pAdvertising->setScanResponse(false);
+  pAdvertising->setMinPreferred(0x0);  // set value to 0x00 to not advertise this parameter
+  BLEDevice::startAdvertising();
+  Serial.println("Waiting a client connection to notify...");
 }
 
 void loop() {
-
+    // notify changed value
+    if (deviceConnected) {
+          std::string value = pCharacteristic->getValue();
+       // pCharacteristic->setValue((uint8_t*)&value, 4);
+        int doble = valor.toInt() * 2 ;
+        String doblado = (String) doble; // Lo convierte en String.
+       
+        pCharacteristic->setValue(doblado.c_str()); // Pone el numero doble
+        pCharacteristic->notify();
+        delay(5); // bluetooth stack will go into congestion, if too many packets are sent.
+    }
+    // disconnecting
+    if (!deviceConnected && oldDeviceConnected) {
+        delay(500); // give the bluetooth stack the chance to get things ready
+        pServer->startAdvertising(); // restart advertising
+        Serial.println("start advertising");
+        oldDeviceConnected = deviceConnected;
+    }
+    // connecting
+    if (deviceConnected && !oldDeviceConnected) {
+        // do stuff here on connecting
+        oldDeviceConnected = deviceConnected;
+    }
 }
