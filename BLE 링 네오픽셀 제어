@@ -1,5 +1,5 @@
 //BLE로 disconnect한 후에 scan이 안되는 버그를 해결하였다.
-//BLE 예제 notify와 기존의 BLE 네오픽셀 코드와 합했다.
+//BLE 예제 notify와 기존의 BLE write 네오픽셀 코드와 합했다.
 //응용한 BLE 코드는 아래와 같다.
 //https://community.appinventor.mit.edu/t/ble-esp32-bluetooth-send-receive-arduino-ide-multitouch/1980/9
 
