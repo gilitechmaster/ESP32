@@ -13,7 +13,7 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
     void onWrite(BLECharacteristic* pCharacteristic) {
       std::string value = pCharacteristic->getValue();
 
-        if (value.length() == 1) {  // 길이가 1이면
+      if (value.length() == 1) {  // 길이가 1이면
         Serial.print("끄기");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
@@ -21,7 +21,7 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
         for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
         {
           ring.setPixelColor(i, 0, 0, 0); // 모두 off
-        } 
+        }
         ring.show();
         delay(10);
       }
@@ -32,21 +32,25 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
           Serial.print(value[i]);  // 앞에 2개 없애고 출력
         Serial.println();
         for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
-        { //rgb가 모두 동일하면 흰색 출력된다.
+        {
+          //rgb가 모두 동일하면 흰색 출력된다.
           //ring.setPixelColor(i, 10, 10, 10); //0.1mA
           //0.1mA * 16bit = 1.6mA가 맞을듯 싶다.
+          
           //ring.setPixelColor(i, 20, 20, 20); //0.19mA
           //ring.setPixelColor(i, 30, 30, 30); //0.28mA
           //ring.setPixelColor(i, 40, 40, 40); //0.39mA
-          ring.setPixelColor(i, 150, 150, 150); //1.5mA
+          //ring.setPixelColor(i, 150, 150, 150); //1.5mA
+          ring.setPixelColor(i, 180, 180, 180); //1.8mA
+          //LED처럼 255까지 올릴필요는 없어보이므로 180으로 한다.
         }
         ring.show();
         delay(10);
       }
-      
+
       //https://en.wikipedia.org/wiki/Web_colors
       //RGB 255값에 따른 색상 분류표
-      
+
       if (value.length() == 3) {  // 길이가 3이면
         Serial.print("꽃무늬화이트 켜기");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
@@ -54,8 +58,8 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
         Serial.println();
         for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
         {
-          ring.setPixelColor(i, 255, 250, 240); //
-        } 
+          ring.setPixelColor(i, 180, 170, 140); //
+        }
         ring.show();
         delay(10);
       }
@@ -85,5 +89,5 @@ void setup() {
 }
 
 void loop() {
-  
+
 }
