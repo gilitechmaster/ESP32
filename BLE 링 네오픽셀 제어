@@ -8,7 +8,7 @@ Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 #include <BLEServer.h>
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
-
+//int led = 18;
 class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 데이터 전송시 callback
     void onWrite(BLECharacteristic* pCharacteristic) {
       std::string value = pCharacteristic->getValue();
