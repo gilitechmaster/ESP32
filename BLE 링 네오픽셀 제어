@@ -1,14 +1,14 @@
 #include<Adafruit_NeoPixel.h>
 #define PIN 18
 #define NUM_LEDS 16 // 최대 16개까지 켜짐, 링형 네오픽셀 16bit
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
 #include <BLEDevice.h>
 #include <BLEUtils.h>
 #include <BLEServer.h>
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
-//int led = 18;
+
 class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 데이터 전송시 callback
     void onWrite(BLECharacteristic* pCharacteristic) {
       std::string value = pCharacteristic->getValue();
@@ -20,9 +20,9 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
         Serial.println();
         for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
         {
-          strip.setPixelColor(i, 0, 0, 0); // 모두 off
+          ring.setPixelColor(i, 0, 0, 0); // 모두 off
         } 
-        strip.show();
+        ring.show();
         delay(10);
       }
 
@@ -33,14 +33,14 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
         Serial.println();
         for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
         { //rgb가 모두 동일하면 흰색 출력된다.
-          //strip.setPixelColor(i, 10, 10, 10); //0.1mA
+          //ring.setPixelColor(i, 10, 10, 10); //0.1mA
           //0.1mA * 16bit = 1.6mA가 맞을듯 싶다.
-          //strip.setPixelColor(i, 20, 20, 20); //0.19mA
-          //strip.setPixelColor(i, 30, 30, 30); //0.28mA
-          //strip.setPixelColor(i, 40, 40, 40); //0.39mA
-          strip.setPixelColor(i, 150, 150, 150); //1.5mA
+          //ring.setPixelColor(i, 20, 20, 20); //0.19mA
+          //ring.setPixelColor(i, 30, 30, 30); //0.28mA
+          //ring.setPixelColor(i, 40, 40, 40); //0.39mA
+          ring.setPixelColor(i, 150, 150, 150); //1.5mA
         }
-        strip.show();
+        ring.show();
         delay(10);
       }
       
@@ -54,9 +54,9 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
         Serial.println();
         for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
         {
-          strip.setPixelColor(i, 255, 250, 240); //
+          ring.setPixelColor(i, 255, 250, 240); //
         } 
-        strip.show();
+        ring.show();
         delay(10);
       }
     }
@@ -65,8 +65,8 @@ class MyCallbacks : public BLECharacteristicCallbacks { // 스마트폰에서 �
 void setup() {
 
   Serial.begin(9600);
-  strip.begin();
-  strip.show();
+  ring.begin();
+  ring.show();
 
   BLEDevice::init("MyESP32"); // 디바이스 이름
   BLEServer* pServer = BLEDevice::createServer();
@@ -87,4 +87,3 @@ void setup() {
 void loop() {
   
 }
-
