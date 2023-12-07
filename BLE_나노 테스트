@@ -3,6 +3,11 @@
 
 //네오픽셀 코드를 지우고 Write기능만 쓸 경우 시리얼 통신이 된다.
 
+#include<Adafruit_NeoPixel.h>
+#define PIN 15
+#define NUM_LEDS 16 // 최대 16개까지 켜짐, 링형 네오픽셀 16bit
+Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
+
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
