@@ -1,0 +1,20 @@
+// Potentiometer is connected to GPIO 4 (Analog ADC1_CH6) 
+const int potPin = 4;
+
+// variable for storing the potentiometer value
+int potValue = 0;
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+}
+
+void loop() {
+  // Reading potentiometer value
+  potValue = analogRead(potPin);
+  Serial.println(potValue);
+  delay(500);
+}
+
+//조도센서로 테스트할 때 어둠 = 4095, 밝음 = 900~1000이다.
+//https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/
