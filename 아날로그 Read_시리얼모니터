@@ -14,7 +14,7 @@ void loop() {
   // Reading potentiometer value
   potValue = analogRead(potPin);
   Serial.println(potValue);
-  delay(500);
+  delay(100);
 }
 
 //조도센서로 테스트할 때 어둠 = 4095, 밝음 = 900~1000이다.
