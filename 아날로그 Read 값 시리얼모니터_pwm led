@@ -1,0 +1,29 @@
+//https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/
+// Potentiometer is connected to GPIO 4 (Analog ADC1_CH6) 
+const int potPin = 4;
+
+// variable for storing the potentiometer value
+int potValue = 0;
+
+int ledpin = 18;
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+
+  ledcAttachPin(ledpin, 0);
+  ledcSetup(0, 5000, 8);
+
+}
+
+void loop() {
+  // Reading potentiometer value
+  potValue = analogRead(potPin);
+  Serial.println(potValue);
+  delay(500);
+
+  ledcWrite(0, 1);// analog값 0 ~ 255
+
+}
+
+//광공간완벽제어센서는 4095으로 led on off 무관하고 작동하지 않는다.
