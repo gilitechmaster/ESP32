@@ -3,7 +3,7 @@
 
 #include<Adafruit_NeoPixel.h>
 #define PIN 4
-#define NUM_LEDS 16 // 최대 16개까지 켜짐, 링형 네오픽셀 16bit
+#define NUM_LEDS 60 // 최대 16개까지 켜짐, 링형 네오픽셀 16bit
 Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
 #include <BLEDevice.h>
@@ -41,7 +41,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
           ring.setPixelColor(i, 0, 0, 0); // 모두 off
         }
@@ -53,7 +53,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         for (int i = 2; i < value.length(); i++)  // 길이를 -2한 후에
           Serial.print(value[i]);  // 앞에 2개 없애고 출력
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
           //rgb가 모두 동일하면 흰색 출력된다.
           //ring.setPixelColor(i, 10, 10, 10); //0.1mA
@@ -76,7 +76,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
           ring.setPixelColor(i, 240, 128, 128); //
         }
@@ -88,7 +88,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
           ring.setPixelColor(i, 255, 69, 0); //
         }
@@ -100,7 +100,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
           ring.setPixelColor(i, 0, 255, 255); //
         }
@@ -112,7 +112,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
           ring.setPixelColor(i, 255, 0, 255); //
         }
@@ -124,7 +124,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
           ring.setPixelColor(i, 255, 0, 0); //
         }
@@ -136,7 +136,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
           ring.setPixelColor(i, 0, 255, 0); //
         }
@@ -148,7 +148,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
         Serial.println();
-        for (int i = 0; i < 16; i++) // 네오픽셀 1~16번까지
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
           ring.setPixelColor(i, 0, 0, 255); //
         }
