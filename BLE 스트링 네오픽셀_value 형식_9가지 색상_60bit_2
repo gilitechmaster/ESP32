@@ -64,7 +64,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
           //ring.setPixelColor(i, 30, 30, 30); //0.28mA
           //ring.setPixelColor(i, 40, 40, 40); //0.39mA
           //ring.setPixelColor(i, 150, 150, 150); //1.5mA
-          ring.setPixelColor(i, 85, 85, 85); //1.8mA
+          ring.setPixelColor(i, 26, 26, 26); //1.8mA
           //LED처럼 255까지 올릴필요는 없어보이므로 180으로 한다.
           //다른 색상과 값을 일체하기 위해서 255로 한다.
         }
@@ -79,7 +79,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         Serial.println();
         for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
-          ring.setPixelColor(i, 80, 43, 43); //
+          ring.setPixelColor(i, 24, 13, 13); //
         }
         ring.show();
         delay(10);
@@ -91,7 +91,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         Serial.println();
         for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
-          ring.setPixelColor(i, 85, 23, 0); //
+          ring.setPixelColor(i, 26, 7, 0); //
         }
         ring.show();
         delay(10);
@@ -103,7 +103,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         Serial.println();
         for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
-          ring.setPixelColor(i, 0, 85, 85); //
+          ring.setPixelColor(i, 0, 26, 26); //
         }
         ring.show();
         delay(10);
@@ -115,7 +115,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         Serial.println();
         for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
-          ring.setPixelColor(i, 85, 0, 85); //
+          ring.setPixelColor(i, 26, 0, 26); //
         }
         ring.show();
         delay(10);
@@ -127,7 +127,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         Serial.println();
         for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
-          ring.setPixelColor(i, 85, 0, 0); //
+          ring.setPixelColor(i, 26, 0, 0); //
         }
         ring.show();
         delay(10);
@@ -139,7 +139,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         Serial.println();
         for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
-          ring.setPixelColor(i, 0, 85, 0); //
+          ring.setPixelColor(i, 0, 26, 0); //
         }
         ring.show();
         delay(10);
@@ -151,7 +151,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         Serial.println();
         for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
         {
-          ring.setPixelColor(i, 0, 0, 85); //
+          ring.setPixelColor(i, 0, 0, 26); //
         }
         ring.show();
         delay(10);
