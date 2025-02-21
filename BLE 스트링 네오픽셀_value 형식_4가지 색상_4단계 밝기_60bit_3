@@ -154,7 +154,107 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         delay(10);
       }
 
-      
+
+
+ if (value == "31") {  
+        Serial.print("Cyan");
+        for (int i = 0; i < value.length(); i++)  // 모든 길이가
+          Serial.print(value[i]);  // 그냥 출력된다
+        Serial.println();
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
+        {
+          ring.setPixelColor(i, 0, 255, 255); // 100%
+        }
+        ring.show();
+        delay(10);
+      }
+       if (value == "32") {  
+        Serial.print("Cyan");
+        for (int i = 0; i < value.length(); i++)  // 모든 길이가
+          Serial.print(value[i]);  // 그냥 출력된다
+        Serial.println();
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
+        {
+          ring.setPixelColor(i, 0, 179, 179); // 70%
+        }
+        ring.show();
+        delay(10);
+      }
+       if (value == "33") {  
+        Serial.print("Cyan");
+        for (int i = 0; i < value.length(); i++)  // 모든 길이가
+          Serial.print(value[i]);  // 그냥 출력된다
+        Serial.println();
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
+        {
+          ring.setPixelColor(i, 0, 102, 102); // 40%
+        }
+        ring.show();
+        delay(10);
+      }
+       if (value == "34") {  
+        Serial.print("Cyan");
+        for (int i = 0; i < value.length(); i++)  // 모든 길이가
+          Serial.print(value[i]);  // 그냥 출력된다
+        Serial.println();
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
+        {
+          ring.setPixelColor(i, 0, 26, 26); // 10$
+        }
+        ring.show();
+        delay(10);
+      }
+
+
+
+       if (value == "41") {  
+        Serial.print("Magenta");
+        for (int i = 0; i < value.length(); i++)  // 모든 길이가
+          Serial.print(value[i]);  // 그냥 출력된다
+        Serial.println();
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
+        {
+          ring.setPixelColor(i, 255, 0, 255); // 100%
+        }
+        ring.show();
+        delay(10);
+      }
+       if (value == "42") {  
+        Serial.print("Magenta");
+        for (int i = 0; i < value.length(); i++)  // 모든 길이가
+          Serial.print(value[i]);  // 그냥 출력된다
+        Serial.println();
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
+        {
+          ring.setPixelColor(i, 179, 0, 179); // 70%
+        }
+        ring.show();
+        delay(10);
+      }
+       if (value == "43") {  
+        Serial.print("Magenta");
+        for (int i = 0; i < value.length(); i++)  // 모든 길이가
+          Serial.print(value[i]);  // 그냥 출력된다
+        Serial.println();
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
+        {
+          ring.setPixelColor(i, 102, 0, 102); // 40%
+        }
+        ring.show();
+        delay(10);
+      }
+       if (value == "44") {  
+        Serial.print("Magenta");
+        for (int i = 0; i < value.length(); i++)  // 모든 길이가
+          Serial.print(value[i]);  // 그냥 출력된다
+        Serial.println();
+        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
+        {
+          ring.setPixelColor(i, 26, 0, 26); // 10%
+        }
+        ring.show();
+        delay(10);
+      }
 
 
 
