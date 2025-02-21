@@ -50,22 +50,11 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         delay(10);
       }
 
-      //100%, 70%, 40% 10% 으로 줄인다.
+      //70%, 10% 으로 줄인다.
 
 
+      
       if (value == "11") {  
-        Serial.print("LightCoral");
-        for (int i = 0; i < value.length(); i++)  // 모든 길이가
-          Serial.print(value[i]);  // 그냥 출력된다
-        Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
-        {
-          ring.setPixelColor(i, 240, 128, 128); //100%
-        }
-        ring.show();
-        delay(10);
-      }
-      if (value == "12") {  
         Serial.print("LightCoral");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
@@ -77,19 +66,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         ring.show();
         delay(10);
       }
-      if (value == "13") {  
-        Serial.print("LightCoral");
-        for (int i = 0; i < value.length(); i++)  // 모든 길이가
-          Serial.print(value[i]);  // 그냥 출력된다
-        Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
-        {
-          ring.setPixelColor(i, 96, 51, 51); //40%
-        }
-        ring.show();
-        delay(10);
-      }
-      if (value == "14") {  
+      if (value == "12") {  
         Serial.print("LightCoral");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
@@ -105,19 +82,8 @@ class MyCallbacks: public BLECharacteristicCallbacks {
 
 
 
+      
       if (value == "21") {  
-        Serial.print("OrangeRed");
-        for (int i = 0; i < value.length(); i++)  // 모든 길이가
-          Serial.print(value[i]);  // 그냥 출력된다
-        Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
-        {
-          ring.setPixelColor(i, 255, 69, 0); //100%
-        }
-        ring.show();
-        delay(10);
-      }
-      if (value == "22") {  
         Serial.print("OrangeRed");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
@@ -129,19 +95,8 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         ring.show();
         delay(10);
       }
-      if (value == "23") {  
-        Serial.print("OrangeRed");
-        for (int i = 0; i < value.length(); i++)  // 모든 길이가
-          Serial.print(value[i]);  // 그냥 출력된다
-        Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
-        {
-          ring.setPixelColor(i, 102, 28, 0); // 40%
-        }
-        ring.show();
-        delay(10);
-      }
-      if (value == "24") {  
+      
+      if (value == "22") {  
         Serial.print("OrangeRed");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
@@ -156,19 +111,8 @@ class MyCallbacks: public BLECharacteristicCallbacks {
 
 
 
- if (value == "31") {  
-        Serial.print("Cyan");
-        for (int i = 0; i < value.length(); i++)  // 모든 길이가
-          Serial.print(value[i]);  // 그냥 출력된다
-        Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
-        {
-          ring.setPixelColor(i, 0, 255, 255); // 100%
-        }
-        ring.show();
-        delay(10);
-      }
-       if (value == "32") {  
+ 
+       if (value == "31") {  
         Serial.print("Cyan");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
@@ -180,19 +124,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         ring.show();
         delay(10);
       }
-       if (value == "33") {  
-        Serial.print("Cyan");
-        for (int i = 0; i < value.length(); i++)  // 모든 길이가
-          Serial.print(value[i]);  // 그냥 출력된다
-        Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
-        {
-          ring.setPixelColor(i, 0, 102, 102); // 40%
-        }
-        ring.show();
-        delay(10);
-      }
-       if (value == "34") {  
+       if (value == "32") {  
         Serial.print("Cyan");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
@@ -207,19 +139,8 @@ class MyCallbacks: public BLECharacteristicCallbacks {
 
 
 
+       
        if (value == "41") {  
-        Serial.print("Magenta");
-        for (int i = 0; i < value.length(); i++)  // 모든 길이가
-          Serial.print(value[i]);  // 그냥 출력된다
-        Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
-        {
-          ring.setPixelColor(i, 255, 0, 255); // 100%
-        }
-        ring.show();
-        delay(10);
-      }
-       if (value == "42") {  
         Serial.print("Magenta");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
@@ -231,19 +152,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         ring.show();
         delay(10);
       }
-       if (value == "43") {  
-        Serial.print("Magenta");
-        for (int i = 0; i < value.length(); i++)  // 모든 길이가
-          Serial.print(value[i]);  // 그냥 출력된다
-        Serial.println();
-        for (int i = 0; i < 60; i++) // 네오픽셀 1~16번까지
-        {
-          ring.setPixelColor(i, 102, 0, 102); // 40%
-        }
-        ring.show();
-        delay(10);
-      }
-       if (value == "44") {  
+       if (value == "42") {  
         Serial.print("Magenta");
         for (int i = 0; i < value.length(); i++)  // 모든 길이가
           Serial.print(value[i]);  // 그냥 출력된다
